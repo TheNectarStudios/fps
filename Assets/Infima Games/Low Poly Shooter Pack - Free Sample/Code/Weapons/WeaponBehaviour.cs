@@ -124,7 +124,7 @@ namespace InfimaGames.LowPolyShooterPack
         /// <summary>
         /// Fills the character's equipped weapon's ammunition by a certain amount, or fully if set to -1.
         /// </summary>
-        public abstract void FillAmmunition(int amount);
+        // public abstract void FillAmmunition(int amount);
 
         /// <summary>
         /// Ejects a casing from the weapon. This is commonly called from animation events, but can be called from anywhere.

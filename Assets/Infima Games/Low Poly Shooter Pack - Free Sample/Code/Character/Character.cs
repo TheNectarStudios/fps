@@ -816,8 +816,8 @@ namespace InfimaGames.LowPolyShooterPack
 		public override void FillAmmunition(int amount)
 		{
 			//Notify the weapon to fill the ammunition by the amount.
-			if(equippedWeapon != null)
-				equippedWeapon.FillAmmunition(amount);
+			// if(equippedWeapon != null)
+			// 	equippedWeapon.FillAmmunition(amount);
 		}
 		
 		public override void SetActiveMagazine(int active)

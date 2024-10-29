@@ -1158,7 +1158,6 @@ GameObject:
   - component: {fileID: 5393623835644209928}
   - component: {fileID: 5393623835644209934}
   - component: {fileID: 5393623835644209929}
-  - component: {fileID: 3186231601051171096}
   m_Layer: 5
   m_Name: Text Ammunition Total
   m_TagString: Untagged
@@ -1283,18 +1282,6 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!114 &3186231601051171096
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5393623835644209931}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7f4935c311e04f97a173620167a7c602, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &5393623835784200508
 GameObject:
   m_ObjectHideFlags: 0
