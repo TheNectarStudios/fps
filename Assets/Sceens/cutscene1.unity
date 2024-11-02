@@ -736,7 +736,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -103.9, y: -106.3}
+  m_AnchoredPosition: {x: -103.90234, y: -106.3}
   m_SizeDelta: {x: 250, y: 250}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!225 &311289042
@@ -1128,6 +1128,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 1782287779}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 9886fcf7ce62fc1478cf585f128aea7c,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1782287781}
     - targetCorrespondingSourceObject: {fileID: 2670928988342468123, guid: 9886fcf7ce62fc1478cf585f128aea7c,
         type: 3}
       insertIndex: -1
@@ -1735,7 +1739,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 141.8, y: -142.1}
+  m_AnchoredPosition: {x: 141.80078, y: -142.1}
   m_SizeDelta: {x: 350, y: 350}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &579525309
@@ -2593,7 +2597,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -77.2, y: -219.4}
+  m_AnchoredPosition: {x: -77.19922, y: -219.4}
   m_SizeDelta: {x: 140, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!225 &1222817847
@@ -3529,8 +3533,30 @@ MonoBehaviour:
   detectionRange: 20
   aimRange: 15
   shootingRange: 10
-  fieldOfView: 60
-  rotationSpeed: 5
+  fieldOfView: 136.2
+  rotationSpeed: 20.42
+--- !u!195 &1782287781
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1782287776}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!1 &1784440029
 GameObject:
   m_ObjectHideFlags: 0
@@ -4090,7 +4116,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 2.8469e-39, y: 9.1835e-41, z: 0, w: 0}
+  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 1.0602104e+30}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
