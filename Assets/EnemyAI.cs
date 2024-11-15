@@ -4,23 +4,33 @@ using UnityEngine.AI;
 public class EnemyAIController : MonoBehaviour
 {
     public Transform player;
+    public Transform firePoint;
+    public GameObject bulletPrefab;
+    public AudioClip shootingSound;
     public float detectionRange = 20f;
     public float shootingRange = 10f;
     public float fieldOfView = 60f;
     public float rotationSpeed = 5f;
-    public float rotationOffset = 60f; // Offset angle for aiming and shooting
+    public float fireRate = 1f;
 
     private Animator animator;
     private NavMeshAgent agent;
+    private AudioSource audioSource;
 
     private Vector3 lastKnownPlayerPosition;
     private bool playerInSight = false;
     private bool playerWasSpotted = false;
+    private float nextFireTime = 0f;
 
     void Start()
     {
         animator = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null)
+        {
+            audioSource = gameObject.AddComponent<AudioSource>();
+        }
     }
 
     void Update()
@@ -29,10 +39,9 @@ public class EnemyAIController : MonoBehaviour
 
         if (playerInSight)
         {
-            // Player spotted, remember their position and stop moving
+            // Player spotted, remember their position
             lastKnownPlayerPosition = player.position;
             playerWasSpotted = true;
-            agent.isStopped = true;
 
             if (Vector3.Distance(transform.position, player.position) <= shootingRange)
             {
@@ -45,7 +54,7 @@ public class EnemyAIController : MonoBehaviour
         }
         else if (playerWasSpotted)
         {
-            // Player out of sight, move to last known position if not already there
+            // Player out of sight but previously spotted
             MoveToLastKnownPosition();
         }
         else
@@ -56,7 +65,7 @@ public class EnemyAIController : MonoBehaviour
 
         if (animator.GetBool("isAiming") || animator.GetBool("isShooting"))
         {
-            FacePlayerSmoothlyWithOffset();
+            FacePlayerSmoothly();
         }
     }
 
@@ -95,24 +104,34 @@ public class EnemyAIController : MonoBehaviour
         animator.SetBool("isWalking", false);
 
         agent.isStopped = true;  // Stop moving to shoot
+
+        if (Time.time >= nextFireTime)
+        {
+            // Instantiate bullet at the fire point
+            GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+
+            // Play the shooting sound
+            audioSource.PlayOneShot(shootingSound);
+
+            // Set the next fire time
+            nextFireTime = Time.time + 1f / fireRate;
+        }
     }
 
     private void MoveToLastKnownPosition()
     {
-        if (Vector3.Distance(transform.position, lastKnownPlayerPosition) < 1f)
-        {
-            // Reached last known position, stop moving
-            playerWasSpotted = false;
-            GoIdle();
-            return;
-        }
-
         animator.SetBool("isAiming", false);
         animator.SetBool("isShooting", false);
         animator.SetBool("isWalking", true);
 
         agent.isStopped = false;
         agent.SetDestination(lastKnownPlayerPosition);
+
+        if (Vector3.Distance(transform.position, lastKnownPlayerPosition) < 1f)
+        {
+            playerWasSpotted = false;  // Reached last known position, stop moving
+            GoIdle();
+        }
     }
 
     private void GoIdle()
@@ -124,13 +143,10 @@ public class EnemyAIController : MonoBehaviour
         agent.isStopped = true;  // Idle, stop moving
     }
 
-    private void FacePlayerSmoothlyWithOffset()
+    private void FacePlayerSmoothly()
     {
         Vector3 directionToPlayer = (player.position - transform.position).normalized;
         Quaternion lookRotation = Quaternion.LookRotation(new Vector3(directionToPlayer.x, 0, directionToPlayer.z));
-
-        // Apply the 60-degree offset to the look rotation
-        Quaternion offsetRotation = Quaternion.Euler(0, rotationOffset, 0) * lookRotation;
-        transform.rotation = Quaternion.Slerp(transform.rotation, offsetRotation, Time.deltaTime * rotationSpeed);
+        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * rotationSpeed);
     }
 }
